@@ -52,17 +52,63 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7va-3z-SzT">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7va-3z-SzT">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableCell" id="Cex-Wd-CRn">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableCell" rowHeight="150" id="Cex-Wd-CRn" customClass="TableCell" customModule="OpenLibraryiOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cex-Wd-CRn" id="o4a-EC-Am6">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="149.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qJW-Ox-XNe">
+                                                    <rect key="frame" x="24" y="15" width="100" height="128"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="KYV-SJ-GUE"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="0Ae-e3-lMu">
+                                                    <rect key="frame" x="132" y="15" width="254" height="120"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCo-Oi-KSR">
+                                                            <rect key="frame" x="0.0" y="0.0" width="254" height="36"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="szJ-6O-VvP">
+                                                            <rect key="frame" x="0.0" y="42" width="254" height="36"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Published Date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOV-zI-9iG">
+                                                            <rect key="frame" x="0.0" y="84" width="254" height="36"/>
+                                                            <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="0Ae-e3-lMu" firstAttribute="leading" secondItem="qJW-Ox-XNe" secondAttribute="trailing" constant="8" id="0me-38-wCD"/>
+                                                <constraint firstItem="qJW-Ox-XNe" firstAttribute="leading" secondItem="o4a-EC-Am6" secondAttribute="leadingMargin" constant="4" id="2t4-wt-3av"/>
+                                                <constraint firstItem="qJW-Ox-XNe" firstAttribute="top" secondItem="o4a-EC-Am6" secondAttribute="topMargin" constant="4" id="I0t-nK-o4D"/>
+                                                <constraint firstItem="qJW-Ox-XNe" firstAttribute="bottom" secondItem="o4a-EC-Am6" secondAttribute="bottomMargin" constant="4" id="KCH-jd-aQC"/>
+                                                <constraint firstItem="0Ae-e3-lMu" firstAttribute="top" secondItem="o4a-EC-Am6" secondAttribute="topMargin" constant="4" id="qQU-bE-LUc"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="0Ae-e3-lMu" secondAttribute="trailing" constant="8" id="rvF-Pj-FnS"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="0Ae-e3-lMu" secondAttribute="bottom" constant="4" id="wXg-8D-cGb"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="author" destination="szJ-6O-VvP" id="zRj-hE-Vqw"/>
+                                            <outlet property="bookImg" destination="qJW-Ox-XNe" id="zNC-bV-2Zo"/>
+                                            <outlet property="publishedDate" destination="QOV-zI-9iG" id="Pmt-w6-O07"/>
+                                            <outlet property="title" destination="jCo-Oi-KSR" id="qUZ-uf-nUJ"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

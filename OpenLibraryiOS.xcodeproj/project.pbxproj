@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1B2CA67B35D5F799A26C0E4C /* Pods_OpenLibraryiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5855502C796A54D88449754 /* Pods_OpenLibraryiOS.framework */; };
 		672097132399900400285FB9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672097122399900400285FB9 /* SettingsViewController.swift */; };
+		6720971623999E5A00285FB9 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6720971523999E5A00285FB9 /* Book.swift */; };
+		672097182399A80800285FB9 /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672097172399A80800285FB9 /* TableCell.swift */; };
+		6720971A2399B7A200285FB9 /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672097192399B7A200285FB9 /* BookDetailViewController.swift */; };
 		6729360B239982F2007C5BC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6729360A239982F2007C5BC8 /* AppDelegate.swift */; };
 		6729360D239982F2007C5BC8 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6729360C239982F2007C5BC8 /* FirstViewController.swift */; };
 		6729360F239982F2007C5BC8 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6729360E239982F2007C5BC8 /* SecondViewController.swift */; };
@@ -19,6 +22,9 @@
 
 /* Begin PBXFileReference section */
 		672097122399900400285FB9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		6720971523999E5A00285FB9 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		672097172399A80800285FB9 /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
+		672097192399B7A200285FB9 /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
 		67293607239982F2007C5BC8 /* OpenLibraryiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenLibraryiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6729360A239982F2007C5BC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6729360C239982F2007C5BC8 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -52,6 +58,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6720971423999DD400285FB9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6720971523999E5A00285FB9 /* Book.swift */,
+				672097172399A80800285FB9 /* TableCell.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		672935FE239982F2007C5BC8 = {
 			isa = PBXGroup;
 			children = (
@@ -73,9 +88,11 @@
 		67293609239982F2007C5BC8 /* OpenLibraryiOS */ = {
 			isa = PBXGroup;
 			children = (
+				6720971423999DD400285FB9 /* Model */,
 				6729360A239982F2007C5BC8 /* AppDelegate.swift */,
 				6729360C239982F2007C5BC8 /* FirstViewController.swift */,
 				6729360E239982F2007C5BC8 /* SecondViewController.swift */,
+				672097192399B7A200285FB9 /* BookDetailViewController.swift */,
 				672097122399900400285FB9 /* SettingsViewController.swift */,
 				67293610239982F2007C5BC8 /* Main.storyboard */,
 				67293613239982F4007C5BC8 /* Assets.xcassets */,
@@ -208,9 +225,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				672097182399A80800285FB9 /* TableCell.swift in Sources */,
 				6729360F239982F2007C5BC8 /* SecondViewController.swift in Sources */,
 				6729360B239982F2007C5BC8 /* AppDelegate.swift in Sources */,
 				6729360D239982F2007C5BC8 /* FirstViewController.swift in Sources */,
+				6720971A2399B7A200285FB9 /* BookDetailViewController.swift in Sources */,
+				6720971623999E5A00285FB9 /* Book.swift in Sources */,
 				672097132399900400285FB9 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
