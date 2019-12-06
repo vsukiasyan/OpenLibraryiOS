@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating {
+class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     var searchTask: DispatchWorkItem?
@@ -19,23 +19,26 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 150
         
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
-        
         searchController.dimsBackgroundDuringPresentation = false
-        
         searchController.searchBar.sizeToFit()
+        searchController.delegate = self
+        
         tableView.tableHeaderView = searchController.searchBar
         
         definesPresentationContext = true
-        
     }
     
-    
+    func didDismissSearchController(_ searchController: UISearchController) {
+        tableView.setContentOffset(CGPoint.zero, animated: false)
+    }
     
     func updateSearchResults(for searchController: UISearchController) {
         self.searchTask?.cancel()
@@ -45,8 +48,17 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             print(searchController.searchBar.text)
             // Make URL request here
             
+            var setting = ""
+            if UserDefaults.standard.integer(forKey: "searchSettings") == 0 {
+                setting = "q="
+            } else if UserDefaults.standard.integer(forKey: "searchSettings") == 1 {
+                setting = "title="
+            } else if UserDefaults.standard.integer(forKey: "searchSettings") == 2 {
+                setting = "author="
+            }
+ 
             guard let searchKey = searchController.searchBar.text else { return }
-            let url = "https://openlibrary.org/search.json?q=\(searchKey)"
+            let url = "https://openlibrary.org/search.json?\(setting)\(searchKey)"
             guard let searchUrl = URL(string: url) else { return }
             
             print(searchUrl)
@@ -107,7 +119,8 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             detailVC.book = book
         }
     }
-  
+    
+    
 
 }
 

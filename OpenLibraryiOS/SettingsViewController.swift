@@ -10,12 +10,22 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
+    @IBOutlet weak var settingsControl: UISegmentedControl!
     
-
+    let userDefaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // Setting up UserDefaults
+        if UserDefaults.standard.object(forKey: "searchSettings") != nil {
+            print("UserDefaults: ", UserDefaults.standard.integer(forKey: "searchSettings"))
+            settingsControl.selectedSegmentIndex = UserDefaults.standard.integer(forKey: "searchSettings")
+        } else {
+            UserDefaults.standard.set(0, forKey: "searchSettings")
+        }
+     
+        
     }
     
     
@@ -24,6 +34,21 @@ class SettingsViewController: UIViewController {
     }
     
 
+    @IBAction func indexChanged(_ sender: Any) {
+        switch settingsControl.selectedSegmentIndex {
+        case 0:
+            print("You picked Relevance")
+            userDefaults.set(0, forKey: "searchSettings")
+        case 1:
+            print("You picked Title")
+            userDefaults.set(1, forKey: "searchSettings")
+        case 2:
+            print("You picked Author")
+            userDefaults.set(2, forKey: "searchSettings")
+        default:
+            print("ERROR")
+        }
+    }
     /*
     // MARK: - Navigation
 
