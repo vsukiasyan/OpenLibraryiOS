@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class BookDetailViewController: UIViewController {
     var book: doc?
@@ -18,6 +19,9 @@ class BookDetailViewController: UIViewController {
     
     @IBOutlet weak var wishlistBtn: UIButton!
     
+    lazy var realm:Realm = {
+        return try! Realm()
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +64,17 @@ class BookDetailViewController: UIViewController {
     }
     
     @objc func addToWishlist() {
-        print("added to wishlist")
+ 
+        let x = Book()
+        x.title = (book?.title)!
+        x.author_name = (book?.author_name!.first)!
+        x.first_publish_year = (book?.first_publish_year)!
+
+        try! realm.write {
+            realm.add(x)
+        }
+        
+       
     }
     
     func getImage(cover_i: Int){

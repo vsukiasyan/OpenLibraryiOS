@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct BookObject: Decodable{
     let start: Int?
@@ -28,5 +29,11 @@ struct doc: Decodable{
     let publisher: [String]?
     let author_alternative_name: [String]?
     let ia: [String]?
+}
+
+class Book: Object {
+    @objc dynamic var title = ""
+    @objc dynamic var author_name = ""
+    @objc dynamic var first_publish_year = 0
 }
 
