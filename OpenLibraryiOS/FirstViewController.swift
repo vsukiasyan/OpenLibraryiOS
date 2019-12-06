@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController, UITableViewDataSource, UISearchResultsUpdating {
+class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating {
     
     @IBOutlet weak var tableView: UITableView!
     var searchTask: DispatchWorkItem?
@@ -19,6 +19,7 @@ class FirstViewController: UIViewController, UITableViewDataSource, UISearchResu
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 150
         
