@@ -12,23 +12,21 @@ struct BookObject: Decodable{
     let start: Int?
     let num_found: Int?
     let docs: [doc]
-    
 }
 
-struct Books: Decodable{
-    let object: [BookObject]
-}
+//struct Books: Decodable{
+//    let object: [BookObject]
+//}
 
 struct doc: Decodable{
-    let title_suggest: String?
+    let title: String?
     let subtitle: String?
     let author_name: [String]?
     let first_publish_year: Int?
+    let edition_count: Int?
     let cover_i: Int?
     let publisher: [String]?
     let author_alternative_name: [String]?
     let ia: [String]?
-    
-    
 }
 

@@ -88,12 +88,12 @@
 		67293609239982F2007C5BC8 /* OpenLibraryiOS */ = {
 			isa = PBXGroup;
 			children = (
-				6720971423999DD400285FB9 /* Model */,
-				6729360A239982F2007C5BC8 /* AppDelegate.swift */,
 				6729360C239982F2007C5BC8 /* FirstViewController.swift */,
 				6729360E239982F2007C5BC8 /* SecondViewController.swift */,
 				672097192399B7A200285FB9 /* BookDetailViewController.swift */,
 				672097122399900400285FB9 /* SettingsViewController.swift */,
+				6720971423999DD400285FB9 /* Model */,
+				6729360A239982F2007C5BC8 /* AppDelegate.swift */,
 				67293610239982F2007C5BC8 /* Main.storyboard */,
 				67293613239982F4007C5BC8 /* Assets.xcassets */,
 				67293615239982F4007C5BC8 /* LaunchScreen.storyboard */,

@@ -77,6 +77,8 @@ class FirstViewController: UIViewController, UITableViewDataSource, UISearchResu
 
     }
     
+    
+    // Basic tableView functions
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("books count: ", books.count)
         return books.count
@@ -90,6 +92,19 @@ class FirstViewController: UIViewController, UITableViewDataSource, UISearchResu
             return cell
         }
         return UITableViewCell()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let indexPath = tableView.indexPathForSelectedRow
+        
+        if segue.identifier == "DetailVC" {
+            navigationItem.title = nil
+            let detailVC = segue.destination as! BookDetailViewController
+            
+            let book = books[(indexPath?.row)!]
+            
+            detailVC.book = book
+        }
     }
   
 
