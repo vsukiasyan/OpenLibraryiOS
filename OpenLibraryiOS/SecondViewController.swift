@@ -23,6 +23,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = 150
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,6 +38,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "WishListCell") as? WishListCell {
+            
+            cell.setUp((books?[indexPath.row])!)
             cell.wishListTitle.text = books[indexPath.row].title
             cell.wishListAuthor.text = books[indexPath.row].author_name
             cell.wishListPublish.text = "First published: \(books[indexPath.row].first_publish_year)"

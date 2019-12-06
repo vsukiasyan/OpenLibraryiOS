@@ -13,6 +13,7 @@ class Book: Object {
     @objc dynamic var title = ""
     @objc dynamic var author_name = ""
     @objc dynamic var first_publish_year = 0
+    @objc dynamic var cover_i = 0
 }
 
 struct BookObject: Decodable {

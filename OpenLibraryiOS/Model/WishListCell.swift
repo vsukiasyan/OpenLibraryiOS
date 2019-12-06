@@ -21,7 +21,33 @@ class WishListCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
+    func setUp(_ book: Book) {
+        if book.cover_i != 0 {
+            getImage(cover_i: book.cover_i)
+        } else {
+            self.img.image = UIImage(named: "noimage")
+        }
+    }
+    
+    func getImage(cover_i: Int){
+        let url = "https://covers.openlibrary.org/b/id/" + "\(cover_i)" + "-M.jpg"
+        
+        if let imageURL = URL(string: url){
+            
+            DispatchQueue.global().async {
+                let data = try? Data(contentsOf: imageURL)
+                if let data = data {
+                    let image = UIImage(data: data)
+                    
+                    DispatchQueue.main.async {
+                        self.img.image = image
+                    }
+                }
+            }
+        }
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

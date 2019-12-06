@@ -69,6 +69,7 @@ class BookDetailViewController: UIViewController {
         x.title = (book?.title)!
         x.author_name = (book?.author_name!.first)!
         x.first_publish_year = (book?.first_publish_year)!
+        x.cover_i = (book?.cover_i)!
 
         try! realm.write {
             realm.add(x)
