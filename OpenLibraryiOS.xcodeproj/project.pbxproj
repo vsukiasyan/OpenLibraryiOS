@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B2CA67B35D5F799A26C0E4C /* Pods_OpenLibraryiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5855502C796A54D88449754 /* Pods_OpenLibraryiOS.framework */; };
+		670C2502239B1CFF0014D5A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 670C2501239B1CFF0014D5A6 /* Assets.xcassets */; };
 		672097132399900400285FB9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672097122399900400285FB9 /* SettingsViewController.swift */; };
 		6720971623999E5A00285FB9 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6720971523999E5A00285FB9 /* Book.swift */; };
 		672097182399A80800285FB9 /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672097172399A80800285FB9 /* TableCell.swift */; };
@@ -16,12 +17,12 @@
 		6729360D239982F2007C5BC8 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6729360C239982F2007C5BC8 /* FirstViewController.swift */; };
 		6729360F239982F2007C5BC8 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6729360E239982F2007C5BC8 /* SecondViewController.swift */; };
 		67293612239982F2007C5BC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67293610239982F2007C5BC8 /* Main.storyboard */; };
-		67293614239982F4007C5BC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67293613239982F4007C5BC8 /* Assets.xcassets */; };
 		67293617239982F4007C5BC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67293615239982F4007C5BC8 /* LaunchScreen.storyboard */; };
 		67E52482239A08FB0054B8A2 /* WishListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E52481239A08FB0054B8A2 /* WishListCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		670C2501239B1CFF0014D5A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		672097122399900400285FB9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6720971523999E5A00285FB9 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		672097172399A80800285FB9 /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
@@ -31,7 +32,6 @@
 		6729360C239982F2007C5BC8 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		6729360E239982F2007C5BC8 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		67293611239982F2007C5BC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		67293613239982F4007C5BC8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		67293616239982F4007C5BC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		67293618239982F4007C5BC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67E52481239A08FB0054B8A2 /* WishListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListCell.swift; sourceTree = "<group>"; };
@@ -98,8 +98,8 @@
 				6720971423999DD400285FB9 /* Model */,
 				6729360A239982F2007C5BC8 /* AppDelegate.swift */,
 				67293610239982F2007C5BC8 /* Main.storyboard */,
-				67293613239982F4007C5BC8 /* Assets.xcassets */,
 				67293615239982F4007C5BC8 /* LaunchScreen.storyboard */,
+				670C2501239B1CFF0014D5A6 /* Assets.xcassets */,
 				67293618239982F4007C5BC8 /* Info.plist */,
 			);
 			path = OpenLibraryiOS;
@@ -175,7 +175,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				67293617239982F4007C5BC8 /* LaunchScreen.storyboard in Resources */,
-				67293614239982F4007C5BC8 /* Assets.xcassets in Resources */,
+				670C2502239B1CFF0014D5A6 /* Assets.xcassets in Resources */,
 				67293612239982F2007C5BC8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

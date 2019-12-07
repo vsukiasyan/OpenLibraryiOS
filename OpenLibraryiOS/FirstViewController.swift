@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchControllerDelegate {
+class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     var searchTask: DispatchWorkItem?
@@ -19,8 +19,6 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
-        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 150
@@ -30,10 +28,24 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.sizeToFit()
         searchController.delegate = self
+        searchController.searchBar.delegate = self
+        
+        if searchController.isActive == false {
+            EmptyMessage(message: "Start by searching for some of your favorite books!", tableView: tableView)
+            
+            searchController.searchBar.barStyle = .blackOpaque
+            searchController.searchBar.searchBarStyle = .minimal
+            
+        }
         
         tableView.tableHeaderView = searchController.searchBar
         
         definesPresentationContext = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.title = "OpenLibrary"
     }
     
     func didDismissSearchController(_ searchController: UISearchController) {
@@ -41,6 +53,11 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func updateSearchResults(for searchController: UISearchController) {
+        
+        if searchController.isActive == true {
+            searchController.searchBar.searchBarStyle = .default
+        }
+        
         self.searchTask?.cancel()
         
         // Replace previous task with a new one
@@ -90,6 +107,16 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     }
     
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("You just cancelled")
+        searchController.searchBar.barStyle = .blackOpaque
+        searchController.searchBar.searchBarStyle = .minimal
+        
+        books.removeAll()
+        tableView.reloadData()
+        
+    }
+    
     
     // Basic tableView functions
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -118,6 +145,20 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             detailVC.book = book
         }
+    }
+    
+    func EmptyMessage(message: String, tableView: UITableView) {
+        let rect = CGRect(origin: CGPoint(x: 0,y :0), size: CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+        let messageLabel = UILabel(frame: rect)
+        messageLabel.text = message
+        messageLabel.textColor = UIColor.blue
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        messageLabel.font = UIFont(name: "TrebuchetMS", size: 20)
+        messageLabel.sizeToFit()
+        
+        tableView.backgroundView = messageLabel
+        tableView.separatorStyle = .none
     }
     
     
