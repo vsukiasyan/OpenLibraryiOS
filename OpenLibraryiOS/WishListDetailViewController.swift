@@ -16,9 +16,9 @@ class WishListDetailViewController: UIViewController {
     @IBOutlet weak var bookAuthor: UILabel!
     @IBOutlet weak var yearPublished: UILabel!
     @IBOutlet weak var wishListBtn: UIButton!
-    
+    // Book object that will be used to display book info
     var book: Book = Book()
-    
+    // Realm object for deletion
     lazy var realm: Realm = {
         return try! Realm()
     }()
@@ -29,6 +29,7 @@ class WishListDetailViewController: UIViewController {
         setUp()
     }
     
+    // Set up initial view
     func setUp() {
         imageView.imageFromServerURL(urlString: "https://covers.openlibrary.org/b/id/" + "\(book.cover_i)" + "-M.jpg")
         self.imageView.layer.shadowColor = UIColor.black.cgColor
@@ -49,8 +50,11 @@ class WishListDetailViewController: UIViewController {
     
     
     @objc func removeFromWishList() {
+        // Delete book object from Realm
         try! realm.write {
             realm.delete(book)
         }
+        // Disable the button so the user doesn't try to remove it again
+        wishListBtn.isEnabled = false
     }
 }

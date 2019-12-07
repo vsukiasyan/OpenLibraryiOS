@@ -9,8 +9,7 @@
 import UIKit
 
 class WishListCell: UITableViewCell {
-    
-   
+
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var wishListTitle: UILabel!
     @IBOutlet weak var wishListAuthor: UILabel!

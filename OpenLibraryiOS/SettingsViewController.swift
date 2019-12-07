@@ -9,7 +9,7 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-    
+    // Segmented Control to keep track of search settings
     @IBOutlet weak var settingsControl: UISegmentedControl!
     
     let userDefaults = UserDefaults.standard
@@ -18,45 +18,31 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         
         // Setting up UserDefaults
+        // If UserDefaults for searchSettings exists, change the index of the segmented control
+        // If it doesn't, set index 0 as default
         if UserDefaults.standard.object(forKey: "searchSettings") != nil {
-            print("UserDefaults: ", UserDefaults.standard.integer(forKey: "searchSettings"))
             settingsControl.selectedSegmentIndex = UserDefaults.standard.integer(forKey: "searchSettings")
         } else {
             UserDefaults.standard.set(0, forKey: "searchSettings")
         }
-     
-        
     }
     
-    
+    // Dismiss the current modal VC
     @IBAction func close(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-
+    // Keep track of the segmented control's state in UserDefaults
     @IBAction func indexChanged(_ sender: Any) {
         switch settingsControl.selectedSegmentIndex {
         case 0:
-            print("You picked Relevance")
             userDefaults.set(0, forKey: "searchSettings")
         case 1:
-            print("You picked Title")
             userDefaults.set(1, forKey: "searchSettings")
         case 2:
-            print("You picked Author")
             userDefaults.set(2, forKey: "searchSettings")
         default:
-            print("ERROR")
+            print("Search Settings ERROR!")
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

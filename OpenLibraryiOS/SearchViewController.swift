@@ -57,7 +57,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func updateSearchResults(for searchController: UISearchController) {
         
         self.searchTask?.cancel()
-        books.removeAll()
+        
         // Replace previous task with a new one
         let task = DispatchWorkItem { [weak self] in
             print(searchController.searchBar.text)
@@ -86,6 +86,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     //print(self?.books)
                     print("docs count: ", object.docs.count)
                     DispatchQueue.main.async {
+                        if searchController.isActive == true {
+                            self?.tableView.backgroundView = nil
+                        }
                         self?.tableView.reloadData()
                     }
                     
@@ -110,12 +113,14 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         books.removeAll()
         tableView.setContentOffset(CGPoint.zero, animated: false)
         tableView.reloadData()
+        tableView.emptyTableViewMessage(message: "Start by searching for some of your favorite books!", tableView: tableView)
     }
     
     
     // Basic tableView functions
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("books count: ", books.count)
+        
         return books.count
     }
     
@@ -128,6 +133,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         return UITableViewCell()
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     // Prepare for segue and pass selected book to the detail view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let indexPath = tableView.indexPathForSelectedRow

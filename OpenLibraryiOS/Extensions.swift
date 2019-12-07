@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// TableView extension to set a message for empty table views
 extension UITableView {
     func emptyTableViewMessage(message: String, tableView: UITableView) {
         let rect = CGRect(origin: CGPoint(x: 0,y :0), size: CGSize(width: tableView.bounds.size.width, height: tableView.bounds.size.height))
@@ -25,6 +26,7 @@ extension UITableView {
     }
 }
 
+// ImageView extension to take in a valid image string url and display in the ImageView
 extension UIImageView {
     public func imageFromServerURL(urlString: String) {
         self.image = nil

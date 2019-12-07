@@ -32,7 +32,6 @@ class BookDetailViewController: UIViewController {
     func setUp() {
         if let cover = book?.cover_i {
             imageView.imageFromServerURL(urlString: "https://covers.openlibrary.org/b/id/" + "\(cover)" + "-M.jpg")
-            //imageView.image = UIImage(url: URL(string: "https://covers.openlibrary.org/b/id/" + "\(cover)" + "-M.jpg"))
             self.imageView.layer.shadowColor = UIColor.black.cgColor
             self.imageView.layer.shadowOpacity = 1.0
             self.imageView.layer.shadowOffset = CGSize(width: 4, height: 4)
@@ -79,5 +78,6 @@ class BookDetailViewController: UIViewController {
         try! realm.write {
             realm.add(realmBook)
         }
+        wishlistBtn.isEnabled = false
     }
 }
