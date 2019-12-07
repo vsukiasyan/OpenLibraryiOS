@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class WishListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     
     lazy var realm: Realm = {
@@ -27,6 +27,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.title = "Wish List"
         books = realm.objects(Book.self)
         tableView.reloadData()
         if realm.isEmpty {
@@ -34,7 +35,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else {
             tableView.backgroundView = nil
         }
-        self.navigationItem.title = "Wish List"
     }
     
     
