@@ -30,7 +30,13 @@ class WishListDetailViewController: UIViewController {
     }
     
     func setUp() {
-        getImage(cover_i: book.cover_i)
+        imageView.imageFromServerURL(urlString: "https://covers.openlibrary.org/b/id/" + "\(book.cover_i)" + "-M.jpg")
+        self.imageView.layer.shadowColor = UIColor.black.cgColor
+        self.imageView.layer.shadowOpacity = 1.0
+        self.imageView.layer.shadowOffset = CGSize(width: 4, height: 4)
+        self.imageView.layer.shadowRadius = 3.0
+        self.imageView.layer.masksToBounds = false
+        
         bookTitle.text = book.title
         bookAuthor.text = book.author_name
         yearPublished.text = "Published: \(book.first_publish_year)"
@@ -47,38 +53,4 @@ class WishListDetailViewController: UIViewController {
             realm.delete(book)
         }
     }
-    
-    func getImage(cover_i: Int){
-        let url = "https://covers.openlibrary.org/b/id/" + "\(cover_i)" + "-M.jpg"
-        
-        if let imageURL = URL(string: url){
-            
-            DispatchQueue.global().async {
-                let data = try? Data(contentsOf: imageURL)
-                if let data = data {
-                    let image = UIImage(data: data)
-                    
-                    DispatchQueue.main.async {
-                        self.imageView.image = image
-                        self.imageView.layer.shadowColor = UIColor.black.cgColor
-                        self.imageView.layer.shadowOpacity = 1.0
-                        self.imageView.layer.shadowOffset = CGSize(width: 4, height: 4)
-                        self.imageView.layer.shadowRadius = 3.0
-                        self.imageView.layer.masksToBounds = false
-                    }
-                }
-            }
-        }
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

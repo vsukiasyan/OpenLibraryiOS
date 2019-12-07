@@ -11,18 +11,22 @@ import UIKit
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    
     var searchTask: DispatchWorkItem?
     var searchController: UISearchController!
     
+    // The array of books used with this VC
     var books: [doc] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Basic table setup
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 150
         
+        // Basic search controller setup
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
@@ -30,13 +34,14 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchController.delegate = self
         searchController.searchBar.delegate = self
         
+        // Adding the search bar as a navigation item in the nav bar
         navigationItem.searchController = searchController
         navigationItem.searchController?.searchBar.delegate = self
         navigationItem.searchController?.searchResultsUpdater = self
         navigationItem.searchController?.searchBar.showsCancelButton = true
         navigationItem.hidesSearchBarWhenScrolling = false
         
-        
+        // Display empty message if user is not actively searching
         if searchController.isActive == false {
             tableView.emptyTableViewMessage(message: "Start by searching for some of your favorite books!", tableView: tableView)
         }
@@ -49,14 +54,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.navigationItem.title = "OpenLibrary"
     }
     
-    func didDismissSearchController(_ searchController: UISearchController) {
-        tableView.setContentOffset(CGPoint.zero, animated: false)
-    }
-    
     func updateSearchResults(for searchController: UISearchController) {
         
         self.searchTask?.cancel()
-        
+        books.removeAll()
         // Replace previous task with a new one
         let task = DispatchWorkItem { [weak self] in
             print(searchController.searchBar.text)
@@ -72,7 +73,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
  
             guard let searchKey = searchController.searchBar.text else { return }
-            let url = "https://openlibrary.org/search.json?\(setting)\(searchKey)"
+            let url = "https://openlibrary.org/search.json?\(setting)\(searchKey.replacingOccurrences(of: " ", with: "+"))"
             guard let searchUrl = URL(string: url) else { return }
             
             print(searchUrl)
@@ -101,12 +102,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         // Execute task in 0.75 seconds (if not cancelled !)
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.75, execute: task)
-
+        
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         print("You just cancelled")
         books.removeAll()
+        tableView.setContentOffset(CGPoint.zero, animated: false)
         tableView.reloadData()
     }
     
@@ -126,7 +128,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         return UITableViewCell()
     }
-    
+    // Prepare for segue and pass selected book to the detail view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let indexPath = tableView.indexPathForSelectedRow
         

@@ -27,12 +27,17 @@ class BookDetailViewController: UIViewController {
         super.viewDidLoad()
 
         setUp()
-        
     }
-    
+    // Set up the image and text views
     func setUp() {
         if let cover = book?.cover_i {
-            getImage(cover_i: cover)
+            imageView.imageFromServerURL(urlString: "https://covers.openlibrary.org/b/id/" + "\(cover)" + "-M.jpg")
+            //imageView.image = UIImage(url: URL(string: "https://covers.openlibrary.org/b/id/" + "\(cover)" + "-M.jpg"))
+            self.imageView.layer.shadowColor = UIColor.black.cgColor
+            self.imageView.layer.shadowOpacity = 1.0
+            self.imageView.layer.shadowOffset = CGSize(width: 4, height: 4)
+            self.imageView.layer.shadowRadius = 3.0
+            self.imageView.layer.masksToBounds = false
         } else {
             self.imageView.image = UIImage(named: "noimage")
         }
@@ -63,53 +68,16 @@ class BookDetailViewController: UIViewController {
         wishlistBtn.addTarget(self, action: #selector(addToWishlist), for: .touchUpInside)
     }
     
+    // Add current book to the Wish List / Realm DB
     @objc func addToWishlist() {
- 
-        let x = Book()
-        x.title = (book?.title)!
-        x.author_name = (book?.author_name!.first)!
-        x.first_publish_year = (book?.first_publish_year)!
-        x.cover_i = (book?.cover_i)!
+        let realmBook = Book()
+        realmBook.title = (book?.title)!
+        realmBook.author_name = (book?.author_name!.first)!
+        realmBook.first_publish_year = (book?.first_publish_year)!
+        realmBook.cover_i = (book?.cover_i)!
 
         try! realm.write {
-            realm.add(x)
-        }
-        
-       
-    }
-    
-    func getImage(cover_i: Int){
-        let url = "https://covers.openlibrary.org/b/id/" + "\(cover_i)" + "-M.jpg"
-       
-        if let imageURL = URL(string: url){
-            
-            DispatchQueue.global().async {
-                let data = try? Data(contentsOf: imageURL)
-                if let data = data {
-                    let image = UIImage(data: data)
-                    
-                    DispatchQueue.main.async {
-                        self.imageView.image = image
-                        self.imageView.layer.shadowColor = UIColor.black.cgColor
-                        self.imageView.layer.shadowOpacity = 1.0
-                        self.imageView.layer.shadowOffset = CGSize(width: 4, height: 4)
-                        self.imageView.layer.shadowRadius = 3.0
-                        self.imageView.layer.masksToBounds = false
-                    }
-                }
-            }
+            realm.add(realmBook)
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

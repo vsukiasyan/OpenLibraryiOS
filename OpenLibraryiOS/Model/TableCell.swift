@@ -36,32 +36,12 @@ class TableCell: UITableViewCell {
             publishedDate.text = "Published: \(pubDate) - \(bookEditions)"
         }
         
-      
-        
         if let cover = book.cover_i {
-            getImage(cover_i: cover)
+            bookImg.imageFromServerURL(urlString: "https://covers.openlibrary.org/b/id/" + "\(cover)" + "-M.jpg")
         } else {
             self.bookImg.image = UIImage(named: "noimage")
         }
         
-    }
-    
-    func getImage(cover_i: Int){
-        let url = "https://covers.openlibrary.org/b/id/" + "\(cover_i)" + "-M.jpg"
-        
-        if let imageURL = URL(string: url){
-            
-            DispatchQueue.global().async {
-                let data = try? Data(contentsOf: imageURL)
-                if let data = data {
-                    let image = UIImage(data: data)
-                    
-                    DispatchQueue.main.async {
-                        self.bookImg.image = image
-                    }
-                }
-            }
-        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
