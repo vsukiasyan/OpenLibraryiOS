@@ -34,6 +34,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else {
             tableView.backgroundView = nil
         }
+        self.navigationItem.title = "Wish List"
     }
     
     
@@ -85,6 +86,21 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         tableView.backgroundView = messageLabel
         tableView.separatorStyle = .none
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let indexPath = tableView.indexPathForSelectedRow
+        
+        if segue.identifier == "WishListVC" {
+            navigationItem.title = nil
+            
+            let wishListVC = segue.destination as! WishListDetailViewController
+            
+            let book = books![(indexPath?.row)!]
+            
+            wishListVC.book = book
+        }
+        
     }
 }
 

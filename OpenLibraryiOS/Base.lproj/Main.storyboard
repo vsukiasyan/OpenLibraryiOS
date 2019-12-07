@@ -294,6 +294,7 @@
                                             <outlet property="wishListAuthor" destination="oIY-Hk-b7D" id="NEd-YC-DHD"/>
                                             <outlet property="wishListPublish" destination="6gq-9e-H7e" id="9z0-1b-fdl"/>
                                             <outlet property="wishListTitle" destination="bX1-4m-iPe" id="ncf-vL-HVB"/>
+                                            <segue destination="V5Z-Y9-E8o" kind="show" identifier="WishListVC" id="uMM-kz-CJ1"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -372,6 +373,78 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qUe-c5-TVC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="749.27536231884062" y="359.59821428571428"/>
+        </scene>
+        <!--Wish List Detail View Controller-->
+        <scene sceneID="zlI-eC-ch0">
+            <objects>
+                <viewController id="V5Z-Y9-E8o" customClass="WishListDetailViewController" customModule="OpenLibraryiOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Gnf-3s-Dic">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yj7-6b-6tT">
+                                <rect key="frame" x="132" y="96" width="150" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="Nh6-aN-E5c"/>
+                                    <constraint firstAttribute="width" constant="150" id="fR6-S7-QVZ"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book Author" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h0t-kH-Dp1">
+                                <rect key="frame" x="8" y="386" width="398" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Published - Editions" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUR-bR-ga2">
+                                <rect key="frame" x="8" y="418" width="398" height="24"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFF-cj-zbm">
+                                <rect key="frame" x="8" y="354" width="398" height="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A6S-CO-qra">
+                                <rect key="frame" x="88" y="450" width="238" height="39"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
+                                <state key="normal" title="Remove From Wishlist"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="g1S-Qf-n8O" firstAttribute="trailing" secondItem="PUR-bR-ga2" secondAttribute="trailing" constant="8" id="1lT-fC-ZcP"/>
+                            <constraint firstItem="h0t-kH-Dp1" firstAttribute="top" secondItem="cFF-cj-zbm" secondAttribute="bottom" constant="8" id="48J-jc-lCk"/>
+                            <constraint firstItem="PUR-bR-ga2" firstAttribute="top" secondItem="h0t-kH-Dp1" secondAttribute="bottom" constant="8" id="64w-CB-cB9"/>
+                            <constraint firstItem="h0t-kH-Dp1" firstAttribute="centerX" secondItem="Gnf-3s-Dic" secondAttribute="centerX" id="8mL-r5-R4E"/>
+                            <constraint firstItem="yj7-6b-6tT" firstAttribute="centerX" secondItem="Gnf-3s-Dic" secondAttribute="centerX" id="Gc3-tI-79H"/>
+                            <constraint firstItem="A6S-CO-qra" firstAttribute="centerX" secondItem="Gnf-3s-Dic" secondAttribute="centerX" id="Mom-Os-4eP"/>
+                            <constraint firstItem="cFF-cj-zbm" firstAttribute="centerX" secondItem="Gnf-3s-Dic" secondAttribute="centerX" id="OyP-3O-dfO"/>
+                            <constraint firstItem="PUR-bR-ga2" firstAttribute="centerX" secondItem="Gnf-3s-Dic" secondAttribute="centerX" id="WKM-6m-kl7"/>
+                            <constraint firstItem="g1S-Qf-n8O" firstAttribute="trailing" secondItem="h0t-kH-Dp1" secondAttribute="trailing" constant="8" id="X6C-Li-474"/>
+                            <constraint firstItem="PUR-bR-ga2" firstAttribute="leading" secondItem="g1S-Qf-n8O" secondAttribute="leading" constant="8" id="Y9g-4r-i1G"/>
+                            <constraint firstItem="cFF-cj-zbm" firstAttribute="top" secondItem="yj7-6b-6tT" secondAttribute="bottom" constant="8" id="c8W-ic-9OA"/>
+                            <constraint firstItem="A6S-CO-qra" firstAttribute="top" secondItem="PUR-bR-ga2" secondAttribute="bottom" constant="8" id="lex-Xa-Rrt"/>
+                            <constraint firstItem="g1S-Qf-n8O" firstAttribute="trailing" secondItem="cFF-cj-zbm" secondAttribute="trailing" constant="8" id="nMo-bp-k3F"/>
+                            <constraint firstItem="cFF-cj-zbm" firstAttribute="leading" secondItem="g1S-Qf-n8O" secondAttribute="leading" constant="8" id="p0n-NU-Qdi"/>
+                            <constraint firstItem="yj7-6b-6tT" firstAttribute="top" secondItem="g1S-Qf-n8O" secondAttribute="top" constant="8" id="p54-gn-nlt"/>
+                            <constraint firstItem="h0t-kH-Dp1" firstAttribute="leading" secondItem="g1S-Qf-n8O" secondAttribute="leading" constant="8" id="pFv-wB-YKV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="g1S-Qf-n8O"/>
+                    </view>
+                    <connections>
+                        <outlet property="bookAuthor" destination="h0t-kH-Dp1" id="MXJ-KO-Tyo"/>
+                        <outlet property="bookTitle" destination="cFF-cj-zbm" id="WuN-OX-hRD"/>
+                        <outlet property="imageView" destination="yj7-6b-6tT" id="IMa-tr-ZM0"/>
+                        <outlet property="wishListBtn" destination="A6S-CO-qra" id="Qnm-15-cfA"/>
+                        <outlet property="yearPublished" destination="PUR-bR-ga2" id="aet-7P-aWg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ovm-d0-obh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2525" y="366"/>
         </scene>
     </scenes>
     <resources>
