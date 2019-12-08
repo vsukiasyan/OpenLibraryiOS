@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
+class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate, UITabBarControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -24,6 +24,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Setting the tabBarController delegate
+        tabBarController?.delegate = self
         
         // Basic table setup
         tableView.delegate = self
@@ -95,8 +97,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }
                 }
             })
-            // Scroll table view to top
-            self?.tableView.setContentOffset(CGPoint.zero, animated: true)
         }
         self.searchTask = task
         
@@ -128,6 +128,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    // If user taps on tab bar, the list automatically scrolls up
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if tabBarController.selectedIndex == 0 {
+            tableView.setContentOffset(CGPoint.zero, animated: true)
+        }
     }
     
     // Prepare for segue and pass selected book to the detail view
