@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  SearchViewController.swift
 //  OpenLibraryiOS
 //
 //  Created by Vic Sukiasyan on 12/5/19.
@@ -11,8 +11,11 @@ import UIKit
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    
+    // Lazy initilization of Presenter class
+    lazy var presenter = Presenter()
+    // Dispatch work for keeping track of continuous search
     var searchTask: DispatchWorkItem?
+    
     var searchController: UISearchController!
     
     // The array of books used with this VC
@@ -45,7 +48,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if searchController.isActive == false {
             tableView.emptyTableViewMessage(message: "Start by searching for some of your favorite books!", tableView: tableView)
         }
-        
+        // Set to true to ensure that the searchController is presented within its bounds
         definesPresentationContext = true
     }
     
@@ -55,72 +58,44 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        
+        // Cancel current/previous task
         self.searchTask?.cancel()
         
         // Replace previous task with a new one
         let task = DispatchWorkItem { [weak self] in
-            print(searchController.searchBar.text)
-            // Make URL request here
-            
-            var setting = ""
-            if UserDefaults.standard.integer(forKey: "searchSettings") == 0 {
-                setting = "q="
-            } else if UserDefaults.standard.integer(forKey: "searchSettings") == 1 {
-                setting = "title="
-            } else if UserDefaults.standard.integer(forKey: "searchSettings") == 2 {
-                setting = "author="
-            }
- 
+            // Build up the proper URL scheme
             guard let searchKey = searchController.searchBar.text else { return }
-            let url = "https://openlibrary.org/search.json?\(setting)\(searchKey.replacingOccurrences(of: " ", with: "+"))"
-            guard let searchUrl = URL(string: url) else { return }
-            
+            guard let searchUrl = self?.presenter.buildURL(searchKey: searchKey) else { return }
             print(searchUrl)
-            
-            URLSession.shared.dataTask(with: searchUrl, completionHandler: { (data, response, error) in
-                guard let data = data else { return }
-                do {
-                    let object = try JSONDecoder().decode(BookObject.self, from: data)
-                    self?.books = object.docs
-                    //print(self?.books)
-                    print("docs count: ", object.docs.count)
-                    DispatchQueue.main.async {
-                        if searchController.isActive == true {
-                            self?.tableView.backgroundView = nil
-                        }
-                        self?.tableView.reloadData()
+            // Make a call to search API
+            self?.presenter.searchAPI(searchURL: searchUrl, completion: { (docs) in
+                // Results of escaping completion get saved to our books array
+                self?.books = docs
+                // Update UI on main thread
+                DispatchQueue.main.async {
+                    if self?.searchController.isActive == true {
+                        self?.tableView.backgroundView = nil
                     }
-                    
-                    
-                } catch {
-                    print("JSON error: \(error.localizedDescription)")
+                    self?.tableView.reloadData()
                 }
-                
-                
-            }).resume()
-            
+            })
         }
         self.searchTask = task
         
-        // Execute task in 0.75 seconds (if not cancelled !)
+        // Execute task in 0.75 seconds (if not already cancelled!)
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.75, execute: task)
-        
     }
     
+    // When search is canceled the books array is cleared and the tableView is properly updated
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print("You just cancelled")
         books.removeAll()
         tableView.setContentOffset(CGPoint.zero, animated: false)
         tableView.reloadData()
         tableView.emptyTableViewMessage(message: "Start by searching for some of your favorite books!", tableView: tableView)
     }
     
-    
-    // Basic tableView functions
+    // Basic tableView methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("books count: ", books.count)
-        
         return books.count
     }
     
@@ -128,7 +103,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if let cell = tableView.dequeueReusableCell(withIdentifier: "TableCell") as? TableCell {
             let book = books[indexPath.row]
             cell.setUp(book)
-            
             return cell
         }
         return UITableViewCell()
@@ -145,9 +119,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if segue.identifier == "DetailVC" {
             navigationItem.title = nil
             let detailVC = segue.destination as! BookDetailViewController
-            
             let book = books[(indexPath?.row)!]
-            
             detailVC.book = book
         }
     }

@@ -21,6 +21,7 @@
 		673C01A1239B39A400B6877E /* WishListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673C01A0239B39A400B6877E /* WishListDetailViewController.swift */; };
 		67C66513239B510400040DE0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C66512239B510400040DE0 /* Extensions.swift */; };
 		67E52482239A08FB0054B8A2 /* WishListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E52481239A08FB0054B8A2 /* WishListCell.swift */; };
+		67E95C65239C672600D089EB /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E95C64239C672600D089EB /* Presenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		673C01A0239B39A400B6877E /* WishListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListDetailViewController.swift; sourceTree = "<group>"; };
 		67C66512239B510400040DE0 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		67E52481239A08FB0054B8A2 /* WishListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListCell.swift; sourceTree = "<group>"; };
+		67E95C64239C672600D089EB /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		C1F7CA22F1797C30395AA26E /* Pods-OpenLibraryiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenLibraryiOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenLibraryiOS/Pods-OpenLibraryiOS.debug.xcconfig"; sourceTree = "<group>"; };
 		C418CAD052451ACC1F579FDF /* Pods-OpenLibraryiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenLibraryiOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenLibraryiOS/Pods-OpenLibraryiOS.release.xcconfig"; sourceTree = "<group>"; };
 		C5855502C796A54D88449754 /* Pods_OpenLibraryiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenLibraryiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +102,7 @@
 				672097192399B7A200285FB9 /* BookDetailViewController.swift */,
 				673C01A0239B39A400B6877E /* WishListDetailViewController.swift */,
 				672097122399900400285FB9 /* SettingsViewController.swift */,
+				67E95C64239C672600D089EB /* Presenter.swift */,
 				67C66512239B510400040DE0 /* Extensions.swift */,
 				6720971423999DD400285FB9 /* Model */,
 				6729360A239982F2007C5BC8 /* AppDelegate.swift */,
@@ -235,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				672097182399A80800285FB9 /* TableCell.swift in Sources */,
+				67E95C65239C672600D089EB /* Presenter.swift in Sources */,
 				6729360F239982F2007C5BC8 /* WishListViewController.swift in Sources */,
 				6729360B239982F2007C5BC8 /* AppDelegate.swift in Sources */,
 				6729360D239982F2007C5BC8 /* SearchViewController.swift in Sources */,
