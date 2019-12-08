@@ -19,7 +19,7 @@ class SettingsViewController: UIViewController {
         
         // Setting up UserDefaults
         // If UserDefaults for searchSettings exists, change the index of the segmented control
-        // If it doesn't, set index 0 as default
+        // If it doesn't, set index to 0 as default
         if UserDefaults.standard.object(forKey: "searchSettings") != nil {
             settingsControl.selectedSegmentIndex = UserDefaults.standard.integer(forKey: "searchSettings")
         } else {

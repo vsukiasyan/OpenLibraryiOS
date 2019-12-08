@@ -7,8 +7,15 @@
 //
 
 import Foundation
+import RealmSwift
 
 class Presenter {
+    
+    // lazy load of Realm
+    lazy var realm:Realm = {
+        return try! Realm()
+    }()
+    
     // Base URL to start from
     let startURL = "https://openlibrary.org/search.json?"
     
@@ -46,6 +53,40 @@ class Presenter {
                 print("JSON error: \(error.localizedDescription)")
             }
         }).resume()
+    }
+    
+    // Add book to WishList
+    func append(book: doc) {
+        let realmBook = Book()
+        
+        if let title = book.title, let author = book.author_name?.first,
+            let publishYear = book.first_publish_year, let cover = book.cover_i {
+            realmBook.title = title
+            realmBook.author_name = author
+            realmBook.first_publish_year = publishYear
+            realmBook.cover_i = cover
+        }
+        
+        try! realm.write {
+            realm.add(realmBook)
+        }
+    }
+    
+    // Remove book from WishList
+    func remove(book: Book) {
+        try! realm.write {
+            realm.delete(book)
+        }
+    }
+    
+    // Get all Book objects if any
+    func getObjects() -> Results<Book> {
+        return realm.objects(Book.self)
+    }
+    
+    // Check if Realm DB is empty
+    func isRealmEmpty() -> Bool {
+        return realm.isEmpty
     }
 }
 

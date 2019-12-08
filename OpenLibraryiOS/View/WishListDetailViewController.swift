@@ -20,10 +20,8 @@ class WishListDetailViewController: UIViewController {
     // Book object that will be used to display book info
     var book: Book = Book()
     
-    // Lazy load of realm object
-    lazy var realm: Realm = {
-        return try! Realm()
-    }()
+    // Lazy initilization of Presenter class
+    lazy var presenter = Presenter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,12 +48,10 @@ class WishListDetailViewController: UIViewController {
         wishListBtn.addTarget(self, action: #selector(removeFromWishList), for: .touchUpInside)
     }
     
-    
+    // Remove book from WishList
     @objc func removeFromWishList() {
-        // Delete book object from Realm
-        try! realm.write {
-            realm.delete(book)
-        }
+        presenter.remove(book: book)
+        
         // Disable the button so the user doesn't try to remove it again
         wishListBtn.isEnabled = false
     }

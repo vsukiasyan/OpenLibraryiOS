@@ -12,10 +12,8 @@ import RealmSwift
 class WishListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     
-    // Lazy load Realm so it's only loaded when needed
-    lazy var realm: Realm = {
-        return try! Realm()
-    }()
+    // Lazy initilization of Presenter class
+    lazy var presenter = Presenter()
     
     // Array of books returned from Realm
     var books: Results<Book>!
@@ -30,9 +28,11 @@ class WishListViewController: UIViewController, UITableViewDelegate, UITableView
     
     // Load books array from Realm when view appears or show empty message
     override func viewWillAppear(_ animated: Bool) {
-        books = realm.objects(Book.self)
+        books = presenter.getObjects()
+        
         tableView.reloadData()
-        if realm.isEmpty {
+        
+        if presenter.isRealmEmpty() {
             tableView.emptyTableViewMessage(message: "Looks like your Wish List is empty.", tableView: tableView)
         } else {
             tableView.backgroundView = nil
@@ -65,10 +65,9 @@ class WishListViewController: UIViewController, UITableViewDelegate, UITableView
     
     // Delete selected book from an index and check if list is empty to display a message
     func deleteBookAt(index: Int) {
-        try! realm.write {
-            realm.delete(self.books[index])
-        }
-        if realm.isEmpty {
+        presenter.remove(book: books[index])
+        
+        if presenter.isRealmEmpty() {
             tableView.emptyTableViewMessage(message: "Looks like your Wish List is empty.", tableView: tableView)
         }
     }

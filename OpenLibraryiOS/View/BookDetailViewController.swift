@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class BookDetailViewController: UIViewController {
     // Book object to setup views
@@ -19,10 +18,8 @@ class BookDetailViewController: UIViewController {
     @IBOutlet weak var publishedLbl: UILabel!
     @IBOutlet weak var wishlistBtn: UIButton!
     
-    // lazy load of Realm
-    lazy var realm:Realm = {
-        return try! Realm()
-    }()
+    // Lazy initilization of Presenter class
+    lazy var presenter = Presenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,20 +64,15 @@ class BookDetailViewController: UIViewController {
         wishlistBtn.layer.borderWidth = 1.5
         wishlistBtn.layer.cornerRadius = 5.0
         wishlistBtn.contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
-        wishlistBtn.addTarget(self, action: #selector(addToWishlist), for: .touchUpInside)
+        wishlistBtn.addTarget(self, action: #selector(addToWishList), for: .touchUpInside)
     }
     
     // Add current book to the Wish List and disable button
-    @objc func addToWishlist() {
-        let realmBook = Book()
-        realmBook.title = (book?.title)!
-        realmBook.author_name = (book?.author_name!.first)!
-        realmBook.first_publish_year = (book?.first_publish_year)!
-        realmBook.cover_i = (book?.cover_i)!
-
-        try! realm.write {
-            realm.add(realmBook)
-        }
+    @objc func addToWishList() {
+        guard let book = book else { return }
+        
+        presenter.append(book: book)
+        
         wishlistBtn.isEnabled = false
     }
 }
