@@ -57,19 +57,32 @@ class Presenter {
     func append(book: doc) {
         let realmBook = Book()
         
-        if let title = book.title, let author = book.author_name?.first, let publishYear = book.first_publish_year,
-           let editionCount = book.edition_count, let publisher = book.publisher?.first, let type = book.type {
-            // Assign values to new Book
-            realmBook.title = title
-            realmBook.author_name = author
-            realmBook.first_publish_year = publishYear
-            realmBook.edition_count = editionCount
-            realmBook.publisher = publisher
-            realmBook.type = type
-        }
-        
         if let cover = book.cover_i {
             realmBook.cover_i = cover
+        }
+        
+        if let title = book.title {
+            realmBook.title = title
+        }
+        
+        if let author = book.author_name?.first {
+            realmBook.author_name = author
+        }
+        
+        if let publishYear = book.first_publish_year {
+            realmBook.first_publish_year = publishYear
+        }
+        
+        if let editionCount = book.edition_count {
+            realmBook.edition_count = editionCount
+        }
+        
+        if let publisher = book.publisher?.first {
+            realmBook.publisher = publisher
+        }
+        
+        if let type = book.type {
+            realmBook.type = type
         }
         
         if let languages = book.language {
@@ -89,7 +102,7 @@ class Presenter {
         }
     }
     
-    // Get all Book objects if any
+    // Get all Book objects, if any
     func getObjects() -> Results<Book> {
         return realm.objects(Book.self)
     }
