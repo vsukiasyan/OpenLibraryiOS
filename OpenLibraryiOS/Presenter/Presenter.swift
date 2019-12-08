@@ -9,16 +9,21 @@
 import Foundation
 
 class Presenter {
+    // Base URL to start from
     let startURL = "https://openlibrary.org/search.json?"
     
+    // Build the URL with the searchKey provided
     func buildURL(searchKey: String) -> URL {
         var setting = ""
-        if UserDefaults.standard.integer(forKey: "searchSettings") == 0 {
+        switch UserDefaults.standard.integer(forKey: "searchSettings") {
+        case 0:
             setting = "q="
-        } else if UserDefaults.standard.integer(forKey: "searchSettings") == 1 {
+        case 1:
             setting = "title="
-        } else if UserDefaults.standard.integer(forKey: "searchSettings") == 2 {
+        case 2:
             setting = "author="
+        default:
+            setting = "q="
         }
         
         let url = "\(startURL)\(setting)\(searchKey.replacingOccurrences(of: " ", with: "+"))"
@@ -28,6 +33,7 @@ class Presenter {
         return searchURL
     }
     
+    // Send a request to the API and pass in the returned object
     func searchAPI(searchURL: URL, completion: @escaping ([doc]) -> Void) {
         URLSession.shared.dataTask(with: searchURL, completionHandler: { (data, response, error) in
             guard let data = data else { return }

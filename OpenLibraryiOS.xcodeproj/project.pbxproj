@@ -70,8 +70,6 @@
 			isa = PBXGroup;
 			children = (
 				6720971523999E5A00285FB9 /* Book.swift */,
-				672097172399A80800285FB9 /* TableCell.swift */,
-				67E52481239A08FB0054B8A2 /* WishListCell.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -117,6 +115,8 @@
 				672097192399B7A200285FB9 /* BookDetailViewController.swift */,
 				673C01A0239B39A400B6877E /* WishListDetailViewController.swift */,
 				672097122399900400285FB9 /* SettingsViewController.swift */,
+				672097172399A80800285FB9 /* TableCell.swift */,
+				67E52481239A08FB0054B8A2 /* WishListCell.swift */,
 				67293610239982F2007C5BC8 /* Main.storyboard */,
 			);
 			path = View;

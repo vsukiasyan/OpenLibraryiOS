@@ -94,7 +94,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.emptyTableViewMessage(message: "Start by searching for some of your favorite books!", tableView: tableView)
     }
     
-    // Basic tableView methods
+    // Basic tableView functions
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return books.count
     }
