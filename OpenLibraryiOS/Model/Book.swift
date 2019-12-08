@@ -14,7 +14,11 @@ class Book: Object {
     @objc dynamic var title = ""
     @objc dynamic var author_name = ""
     @objc dynamic var first_publish_year = 0
+    @objc dynamic var edition_count = 0
     @objc dynamic var cover_i = 0
+    @objc dynamic var publisher = ""
+    @objc dynamic var type = ""
+    @objc dynamic var language = ""
 }
 
 // Book object for JSON initilization
@@ -29,12 +33,11 @@ struct doc: Decodable {
     let title: String?
     let author_name: [String]?
     let first_publish_year: Int?
-    let publisher: [String]?
-    let author_alternative_name: [String]?
-    let subtitle: String?
     let edition_count: Int?
     let cover_i: Int?
-    let ia: [String]?
+    let publisher: [String]?
+    let type: String?
+    let language: [String]?
 }
 
 

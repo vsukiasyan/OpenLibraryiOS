@@ -11,6 +11,7 @@ import UIKit
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    
     // Lazy initilization of Presenter class
     lazy var presenter = Presenter()
     // Dispatch work for keeping track of continuous search
@@ -57,6 +58,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.navigationItem.title = "OpenLibrary"
     }
     
+    // Called when user starts typing in the search bar
     func updateSearchResults(for searchController: UISearchController) {
         // Cancel current/previous task
         self.searchTask?.cancel()

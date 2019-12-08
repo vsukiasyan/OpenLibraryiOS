@@ -12,7 +12,7 @@ import RealmSwift
 class Presenter {
     
     // lazy load of Realm
-    lazy var realm:Realm = {
+    lazy var realm: Realm = {
         return try! Realm()
     }()
     
@@ -35,7 +35,6 @@ class Presenter {
         
         let url = "\(startURL)\(setting)\(searchKey.replacingOccurrences(of: " ", with: "+"))"
         guard let searchURL = URL(string: url) else { return URL(string: "")! }
-        print("SearchURL: ", searchURL)
         
         return searchURL
     }
@@ -48,7 +47,6 @@ class Presenter {
             do {
                 let object = try JSONDecoder().decode(BookObject.self, from: data)
                 completion(object.docs)
-                print("docs count: ", object.docs.count)
             } catch {
                 print("JSON error: \(error.localizedDescription)")
             }
@@ -59,14 +57,26 @@ class Presenter {
     func append(book: doc) {
         let realmBook = Book()
         
-        if let title = book.title, let author = book.author_name?.first,
-            let publishYear = book.first_publish_year, let cover = book.cover_i {
+        if let title = book.title, let author = book.author_name?.first, let publishYear = book.first_publish_year,
+           let editionCount = book.edition_count, let publisher = book.publisher?.first, let type = book.type {
+            // Assign values to new Book
             realmBook.title = title
             realmBook.author_name = author
             realmBook.first_publish_year = publishYear
+            realmBook.edition_count = editionCount
+            realmBook.publisher = publisher
+            realmBook.type = type
+        }
+        
+        if let cover = book.cover_i {
             realmBook.cover_i = cover
         }
         
+        if let languages = book.language {
+            realmBook.language = languages.joined(separator: ", ")
+        }
+        
+        // Write book to Realm DB
         try! realm.write {
             realm.add(realmBook)
         }

@@ -30,6 +30,14 @@ class WishListCell: UITableViewCell {
         
         wishListTitle.text = book.title
         wishListAuthor.text = book.author_name
-        wishListPublish.text = "First published: \(book.first_publish_year)"
+        
+        var bookEditions = ""
+        if book.edition_count > 1 {
+            bookEditions = "\(book.edition_count) editions"
+        } else {
+            bookEditions = "1 edition"
+        }
+        
+        wishListPublish.text = "Published: \(book.first_publish_year) - \(bookEditions)"
     }
 }
