@@ -19,6 +19,7 @@ class TableCell: UITableViewCell {
         // Initialization code
     }
     
+    // Initial UI setup
     func setUp(_ book: doc) {
         title.text = book.title
         author.text = book.author_name?.first
@@ -43,11 +44,4 @@ class TableCell: UITableViewCell {
         }
         
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

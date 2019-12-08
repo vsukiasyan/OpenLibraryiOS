@@ -11,6 +11,7 @@ import RealmSwift
 
 class WishListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
+    
     // Lazy load Realm so it's only loaded when needed
     lazy var realm: Realm = {
         return try! Realm()
@@ -29,7 +30,6 @@ class WishListViewController: UIViewController, UITableViewDelegate, UITableView
     
     // Load books array from Realm when view appears or show empty message
     override func viewWillAppear(_ animated: Bool) {
-        //self.navigationItem.title = "Wish List"
         books = realm.objects(Book.self)
         tableView.reloadData()
         if realm.isEmpty {
@@ -45,24 +45,20 @@ class WishListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "WishListCell") as? WishListCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "WishListCell") as? WishListCell,
+            let book = books?[indexPath.row] {
             
-            cell.setUp((books?[indexPath.row])!)
-            cell.wishListTitle.text = books[indexPath.row].title
-            cell.wishListAuthor.text = books[indexPath.row].author_name
-            cell.wishListPublish.text = "First published: \(books[indexPath.row].first_publish_year)"
+            cell.setUp(book)
             
             return cell
         }
         return UITableViewCell()
     }
     
+    // Slide to delete action
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            print("Delete this", indexPath.row)
-            
             deleteBookAt(index: indexPath.row)
-            
             tableView.reloadData()
         }
     }
@@ -82,8 +78,6 @@ class WishListViewController: UIViewController, UITableViewDelegate, UITableView
         let indexPath = tableView.indexPathForSelectedRow
         
         if segue.identifier == "WishListVC" {
-            //navigationItem.title = nil
-            
             let wishListVC = segue.destination as! WishListDetailViewController
             let book = books![(indexPath?.row)!]
             wishListVC.book = book

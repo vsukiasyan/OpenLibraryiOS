@@ -17,13 +17,14 @@ class Book: Object {
     @objc dynamic var cover_i = 0
 }
 
-
+// Book object for JSON initilization
 struct BookObject: Decodable {
     let start: Int?
     let num_found: Int?
     let docs: [doc]
 }
 
+// doc object for array of books in JSON initialization
 struct doc: Decodable {
     let title: String?
     let author_name: [String]?

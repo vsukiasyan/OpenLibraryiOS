@@ -10,15 +10,16 @@ import UIKit
 import RealmSwift
 
 class BookDetailViewController: UIViewController {
+    // Book object to setup views
     var book: doc?
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var authorLbl: UILabel!
     @IBOutlet weak var publishedLbl: UILabel!
-    
     @IBOutlet weak var wishlistBtn: UIButton!
     
+    // lazy load of Realm
     lazy var realm:Realm = {
         return try! Realm()
     }()
@@ -28,6 +29,7 @@ class BookDetailViewController: UIViewController {
 
         setUp()
     }
+    
     // Set up the image and text views
     func setUp() {
         if let cover = book?.cover_i {
@@ -61,13 +63,14 @@ class BookDetailViewController: UIViewController {
             publishedLbl.text = "Published: \(pubDate) - \(bookEditions)"
         }
         
+        // Configure wish list view and set up a target action
         wishlistBtn.layer.borderWidth = 1.5
         wishlistBtn.layer.cornerRadius = 5.0
         wishlistBtn.contentEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
         wishlistBtn.addTarget(self, action: #selector(addToWishlist), for: .touchUpInside)
     }
     
-    // Add current book to the Wish List / Realm DB
+    // Add current book to the Wish List and disable button
     @objc func addToWishlist() {
         let realmBook = Book()
         realmBook.title = (book?.title)!

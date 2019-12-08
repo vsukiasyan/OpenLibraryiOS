@@ -16,9 +16,11 @@ class WishListDetailViewController: UIViewController {
     @IBOutlet weak var bookAuthor: UILabel!
     @IBOutlet weak var yearPublished: UILabel!
     @IBOutlet weak var wishListBtn: UIButton!
+    
     // Book object that will be used to display book info
     var book: Book = Book()
-    // Realm object for deletion
+    
+    // Lazy load of realm object
     lazy var realm: Realm = {
         return try! Realm()
     }()
