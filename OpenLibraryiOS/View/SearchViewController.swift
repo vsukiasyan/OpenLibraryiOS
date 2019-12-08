@@ -60,6 +60,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // Called when user starts typing in the search bar
     func updateSearchResults(for searchController: UISearchController) {
+        // Return if user hasn't started typing yet
+        if searchController.searchBar.text == "" {
+            return
+        }
+        
         // Cancel current/previous task
         self.searchTask?.cancel()
         
@@ -73,14 +78,25 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self?.presenter.searchAPI(searchURL: searchUrl, completion: { (docs) in
                 // Results of escaping completion get saved to our books array
                 self?.books = docs
-                // Update UI on main thread
-                DispatchQueue.main.async {
-                    if self?.searchController.isActive == true {
-                        self?.tableView.backgroundView = nil
+                // Check if search results are empty
+                if let count = self?.books.count {
+                    if count == 0 {
+                        DispatchQueue.main.async {
+                            self?.tableView.emptyTableViewMessage(message: "No search results!", tableView: self!.tableView)
+                        }
+                    } else {
+                        // Update UI on main thread
+                        DispatchQueue.main.async {
+                            if self?.searchController.isActive == true {
+                                self?.tableView.backgroundView = nil
+                            }
+                            self?.tableView.reloadData()
+                        }
                     }
-                    self?.tableView.reloadData()
                 }
             })
+            // Scroll table view to top
+            self?.tableView.setContentOffset(CGPoint.zero, animated: true)
         }
         self.searchTask = task
         
