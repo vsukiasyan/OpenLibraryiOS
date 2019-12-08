@@ -97,21 +97,37 @@
 		67293609239982F2007C5BC8 /* OpenLibraryiOS */ = {
 			isa = PBXGroup;
 			children = (
-				6729360C239982F2007C5BC8 /* SearchViewController.swift */,
-				6729360E239982F2007C5BC8 /* WishListViewController.swift */,
-				672097192399B7A200285FB9 /* BookDetailViewController.swift */,
-				673C01A0239B39A400B6877E /* WishListDetailViewController.swift */,
-				672097122399900400285FB9 /* SettingsViewController.swift */,
-				67E95C64239C672600D089EB /* Presenter.swift */,
-				67C66512239B510400040DE0 /* Extensions.swift */,
 				6720971423999DD400285FB9 /* Model */,
+				67E95C66239C852800D089EB /* View */,
+				67E95C67239C855B00D089EB /* Presenter */,
+				67C66512239B510400040DE0 /* Extensions.swift */,
 				6729360A239982F2007C5BC8 /* AppDelegate.swift */,
-				67293610239982F2007C5BC8 /* Main.storyboard */,
 				67293615239982F4007C5BC8 /* LaunchScreen.storyboard */,
 				670C2501239B1CFF0014D5A6 /* Assets.xcassets */,
 				67293618239982F4007C5BC8 /* Info.plist */,
 			);
 			path = OpenLibraryiOS;
+			sourceTree = "<group>";
+		};
+		67E95C66239C852800D089EB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6729360C239982F2007C5BC8 /* SearchViewController.swift */,
+				6729360E239982F2007C5BC8 /* WishListViewController.swift */,
+				672097192399B7A200285FB9 /* BookDetailViewController.swift */,
+				673C01A0239B39A400B6877E /* WishListDetailViewController.swift */,
+				672097122399900400285FB9 /* SettingsViewController.swift */,
+				67293610239982F2007C5BC8 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		67E95C67239C855B00D089EB /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				67E95C64239C672600D089EB /* Presenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		812367CBF3A7E71326E95241 /* Pods */ = {
