@@ -85,6 +85,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     if count == 0 {
                         DispatchQueue.main.async {
                             self?.tableView.emptyTableViewMessage(message: "No search results!", tableView: self!.tableView)
+                            self?.tableView.reloadData()
                         }
                     } else {
                         // Update UI on main thread
